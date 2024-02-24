@@ -2,6 +2,7 @@ package ch.heig.mcr.clocks.ui;
 
 import ch.heig.mcr.clocks.time.StopWatch;
 import java.awt.*;
+import java.util.Objects;
 import javax.swing.*;
 
 public class StopWatchControlRow extends JPanel {
@@ -38,14 +39,12 @@ public class StopWatchControlRow extends JPanel {
         add(arabicButton);
         add(digitalButton);
     }
-
     private void showDialog(DisplayMode displayMode) {
         StopWatchVisualizerDialog dialog = new StopWatchVisualizerDialog(
                 (JFrame) SwingUtilities.getWindowAncestor(this),
                 displayMode,
                 stopWatch
         );
-
         dialog.setVisible(true);
     }
 }

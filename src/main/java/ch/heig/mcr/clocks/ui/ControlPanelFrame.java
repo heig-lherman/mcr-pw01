@@ -27,15 +27,7 @@ public class ControlPanelFrame extends JFrame {
             controlRowsPane.add(new StopWatchControlRow(stopWatches[i]));
         }
 
-        JButton romanGlobalButton = new JButton("Cadre romain");
-        JButton arabicGlobalButton = new JButton("Cadre arabe");
-        JButton digitalGlobalButton = new JButton("Numérique");
-
-        globalButtonsRow.add(new JLabel("Tous les chronos"));
-        globalButtonsRow.add(romanGlobalButton);
-        globalButtonsRow.add(arabicGlobalButton);
-        globalButtonsRow.add(digitalGlobalButton);
-
+        globalButtonsRow.add(new StopWatchControlAll(stopWatches));
         add(controlRowsPane);
         add(globalButtonsRow);
     }
