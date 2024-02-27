@@ -13,7 +13,7 @@ public class StopWatchControlRow extends JPanel {
         super(new FlowLayout(FlowLayout.LEFT));
         this.stopWatch = stopWatch;
 
-        JLabel idLabel = new JLabel("Chrono #" + stopWatch.getId());
+        JLabel idLabel = new JLabel(StopWatchString.stopWatchWithId(stopWatch.getId()));
 
         JButton startButton = new JButton(StopWatchString.START);
         JButton stopButton = new JButton(StopWatchString.STOP);
