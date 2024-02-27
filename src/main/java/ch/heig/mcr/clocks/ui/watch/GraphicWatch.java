@@ -17,9 +17,9 @@ abstract public class GraphicWatch extends Watch {
     GraphicWatch(StopWatch stopWatch, String imagePath, Color hourColor, Color minuteColor, Color secondColor) {
         super(stopWatch);
         this.image = new ImageIcon(
-                        (Objects.requireNonNull(getClass().getResource(imagePath))))
-                        .getImage()
-                        .getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+                (Objects.requireNonNull(getClass().getResource(imagePath))))
+                .getImage()
+                .getScaledInstance(200, 200, Image.SCALE_DEFAULT);
         this.hourColor = hourColor;
         this.minuteColor = minuteColor;
         this.secondColor = secondColor;
@@ -40,8 +40,8 @@ abstract public class GraphicWatch extends Watch {
         // Drawing the hour hand
         float hourHandLen = radius / 2f;
         Shape hourHand = new Line2D.Float(0f, 0f, 0f, -hourHandLen);
-        double minuteRot = 2 * Math.PI / 30d;
-        double hourRot = 1 * Math.PI / 6d + minuteRot / 12d;
+        double minuteRot = getMinutes() * Math.PI / 30d;
+        double hourRot = getHours() * Math.PI / 6d + minuteRot / 12d;
         g2.setStroke(new BasicStroke(8f));
         g2.setPaint(hourColor);
         g2.draw(AffineTransform.getRotateInstance(hourRot).createTransformedShape(hourHand));
@@ -57,7 +57,7 @@ abstract public class GraphicWatch extends Watch {
         float r = radius / 6f;
         float secondHandLen = radius - r;
         Shape secondHand = new Line2D.Float(0f, r, 0f, -secondHandLen);
-        double secondRot = 1 * Math.PI / 30d;
+        double secondRot = getSeconds() * Math.PI / 30d;
         g2.setPaint(secondColor);
         g2.setStroke(new BasicStroke(1f));
         g2.draw(AffineTransform.getRotateInstance(secondRot).createTransformedShape(secondHand));
