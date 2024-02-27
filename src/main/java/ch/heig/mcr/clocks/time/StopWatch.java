@@ -13,11 +13,11 @@ public class StopWatch {
 
     private static final long TIMER_INTERVAL = 1000;
     private static int nextId = 0;
-
+    private boolean running = false;
     private final int id;
     private final Timer eventTimer;
 
-    private long count;
+    private long count = 0;
     private CountIncreaseTask currentTask;
 
     private final List<Observer> observers = new LinkedList<>();
@@ -31,8 +31,7 @@ public class StopWatch {
         if (isRunning()) {
             throw new IllegalStateException("Stopwatch is already running");
         }
-
-        count = 0;
+        running = true;
         currentTask = new CountIncreaseTask();
         eventTimer.scheduleAtFixedRate(
                 currentTask,
@@ -45,19 +44,19 @@ public class StopWatch {
         if (!isRunning()) {
             throw new IllegalStateException("Stopwatch is not running");
         }
-
-        count = 0;
+        running = false;
         currentTask.cancel();
-        currentTask = null;
     }
 
     public void reset() {
-        // TODO check if need to notify here
         count = 0;
+        if (!isRunning()) {
+            notifyObservers();
+        }
     }
 
     public boolean isRunning() {
-        return currentTask != null;
+        return running;
     }
 
     public void addObserver(Observer observer) {
