@@ -10,13 +10,19 @@ import java.awt.geom.Line2D;
 import java.util.Objects;
 
 abstract public class GraphicWatch extends Watch {
+    private final Color hourColor;
+    private final Color minuteColor;
+    private final Color secondColor;
     private final Image image;
-    GraphicWatch(StopWatch stopWatch, String imagePath) {
+    GraphicWatch(StopWatch stopWatch, String imagePath, Color hourColor, Color minuteColor, Color secondColor) {
         super(stopWatch);
         this.image = new ImageIcon(
                         (Objects.requireNonNull(getClass().getResource(imagePath))))
                         .getImage()
                         .getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+        this.hourColor = hourColor;
+        this.minuteColor = minuteColor;
+        this.secondColor = secondColor;
         JLabel label = new JLabel("Chrono #" + stopWatch.getId(), SwingConstants.CENTER);
         add(label, BorderLayout.CENTER);
     }
