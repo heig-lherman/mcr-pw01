@@ -1,5 +1,6 @@
 package ch.heig.mcr.clocks.ui;
 
+import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
 import java.awt.*;
 import javax.swing.*;
@@ -9,7 +10,7 @@ public class ControlPanelFrame extends JFrame {
     private StopWatch[] stopWatches;
 
     public ControlPanelFrame(int amountStopwatches) {
-        super("Panneau de contrôle");
+        super(StopWatchString.CONTROL_PANEL_TITLE);
         stopWatches = new StopWatch[amountStopwatches];
 
         JPanel contentPane = new JPanel();

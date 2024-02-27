@@ -1,5 +1,6 @@
 package ch.heig.mcr.clocks.ui.watch;
 
+import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
 
 import java.awt.*;
@@ -12,7 +13,7 @@ public class NumericWatch extends Watch {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        String text = "Chrono #" + getStopWatch().getId() + ": "
+        String text = StopWatchString.stopWatchWithId(getStopWatch().getId()) + ": "
                 + String.format("%02d", getHours()) + ":"
                 + String.format("%02d", getMinutes()) + ":"
                 + String.format("%02d", getSeconds());

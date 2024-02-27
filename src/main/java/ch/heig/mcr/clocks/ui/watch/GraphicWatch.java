@@ -1,5 +1,7 @@
 package ch.heig.mcr.clocks.ui.watch;
 
+import ch.heig.mcr.clocks.constants.StopWatchConstants;
+import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
 
 import javax.swing.*;
@@ -19,11 +21,11 @@ abstract public class GraphicWatch extends Watch {
         this.image = new ImageIcon(
                 (Objects.requireNonNull(getClass().getResource(imagePath))))
                 .getImage()
-                .getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+                .getScaledInstance(StopWatchConstants.WIDTH, StopWatchConstants.HEIGHT, Image.SCALE_DEFAULT);
         this.hourColor = hourColor;
         this.minuteColor = minuteColor;
         this.secondColor = secondColor;
-        JLabel label = new JLabel("Chrono #" + stopWatch.getId(), SwingConstants.CENTER);
+        JLabel label = new JLabel(StopWatchString.stopWatchWithId(stopWatch.getId()), SwingConstants.CENTER);
         add(label, BorderLayout.CENTER);
     }
 

@@ -1,5 +1,6 @@
 package ch.heig.mcr.clocks.ui;
 
+import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
 import java.awt.*;
 import javax.swing.*;
@@ -14,9 +15,9 @@ public class StopWatchControlRow extends JPanel {
 
         JLabel idLabel = new JLabel("Chrono #" + stopWatch.getId());
 
-        JButton startButton = new JButton("Démarrer");
-        JButton stopButton = new JButton("Arrêter");
-        JButton resetButton = new JButton("Réinitialiser");
+        JButton startButton = new JButton(StopWatchString.START);
+        JButton stopButton = new JButton(StopWatchString.STOP);
+        JButton resetButton = new JButton(StopWatchString.RESET);
 
         startButton.addActionListener(e -> stopWatch.start());
         stopButton.addActionListener(e -> stopWatch.stop());
