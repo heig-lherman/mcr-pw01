@@ -48,6 +48,7 @@ public class StopWatch {
 
         count = 0;
         currentTask.cancel();
+        currentTask = null;
     }
 
     public void reset() {
@@ -73,8 +74,12 @@ public class StopWatch {
 
     private void notifyObservers() {
         observers.forEach(observer -> observer.update(
-                id, Duration.ofSeconds(count)
+                id, getDuration()
         ));
+    }
+
+    public Duration getDuration(){
+        return Duration.ofSeconds(count);
     }
 
     @FunctionalInterface

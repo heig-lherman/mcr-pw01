@@ -12,7 +12,7 @@ abstract public class Watch extends JPanel implements StopWatch.Observer {
 
     Watch(StopWatch stopWatch) {
         this.stopWatch = stopWatch;
-        this.value = Duration.ofSeconds(0);
+        this.value = stopWatch.getDuration();
         setLayout(new BorderLayout());
     }
 
