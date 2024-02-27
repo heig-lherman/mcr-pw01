@@ -7,9 +7,11 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.time.Duration;
 import java.util.Objects;
+import java.util.Observer;
 
-abstract public class GraphicWatch extends Watch {
+abstract public class GraphicWatch extends Watch implements StopWatch.Observer {
     private final Image image;
     GraphicWatch(StopWatch stopWatch, String imagePath) {
         super(stopWatch);
@@ -58,5 +60,9 @@ abstract public class GraphicWatch extends Watch {
         g2.fill(new Ellipse2D.Float(-r / 4f, -r / 4f, r / 2f, r / 2f));
 
         g2.dispose();
+    }
+
+    @Override
+    public void update(long id, Duration value) {
     }
 }

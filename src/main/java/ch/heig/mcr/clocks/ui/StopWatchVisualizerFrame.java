@@ -38,6 +38,7 @@ public class StopWatchVisualizerFrame extends JFrame {
         setLayout(new GridLayout(1, stopWatches.length));
         for (StopWatch stopWatch : stopWatches) {
             Watch watch = displayMode.createWatch(stopWatch);
+            stopWatch.addObserver(watch);
             add(watch);
         }
     }
