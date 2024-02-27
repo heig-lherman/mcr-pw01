@@ -9,9 +9,9 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.Objects;
 
-public class GraphicWatch extends Watch{
+abstract public class GraphicWatch extends Watch {
     private final Image image;
-    public GraphicWatch(StopWatch stopWatch, String imagePath) {
+    GraphicWatch(StopWatch stopWatch, String imagePath) {
         super(stopWatch);
         this.image = new ImageIcon(
                         (Objects.requireNonNull(getClass().getResource(imagePath))))
