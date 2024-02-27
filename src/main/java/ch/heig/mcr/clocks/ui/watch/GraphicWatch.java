@@ -43,14 +43,14 @@ abstract public class GraphicWatch extends Watch {
         double minuteRot = 2 * Math.PI / 30d;
         double hourRot = 1 * Math.PI / 6d + minuteRot / 12d;
         g2.setStroke(new BasicStroke(8f));
-        g2.setPaint(Color.BLACK);
+        g2.setPaint(hourColor);
         g2.draw(AffineTransform.getRotateInstance(hourRot).createTransformedShape(hourHand));
 
         // Drawing the minute hand
         float minuteHandLen = 5f * radius / 6f;
         Shape minuteHand = new Line2D.Float(0f, 0f, 0f, -minuteHandLen);
         g2.setStroke(new BasicStroke(4f));
-        g2.setPaint(Color.BLACK);
+        g2.setPaint(minuteColor);
         g2.draw(AffineTransform.getRotateInstance(minuteRot).createTransformedShape(minuteHand));
 
         // Drawing the second hand
@@ -58,7 +58,7 @@ abstract public class GraphicWatch extends Watch {
         float secondHandLen = radius - r;
         Shape secondHand = new Line2D.Float(0f, r, 0f, -secondHandLen);
         double secondRot = 1 * Math.PI / 30d;
-        g2.setPaint(Color.RED);
+        g2.setPaint(secondColor);
         g2.setStroke(new BasicStroke(1f));
         g2.draw(AffineTransform.getRotateInstance(secondRot).createTransformedShape(secondHand));
         g2.fill(new Ellipse2D.Float(-r / 4f, -r / 4f, r / 2f, r / 2f));
