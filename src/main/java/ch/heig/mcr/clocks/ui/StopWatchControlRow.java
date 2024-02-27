@@ -2,7 +2,6 @@ package ch.heig.mcr.clocks.ui;
 
 import ch.heig.mcr.clocks.time.StopWatch;
 import java.awt.*;
-import java.util.Objects;
 import javax.swing.*;
 
 public class StopWatchControlRow extends JPanel {
@@ -23,24 +22,19 @@ public class StopWatchControlRow extends JPanel {
         stopButton.addActionListener(e -> stopWatch.stop());
         resetButton.addActionListener(e -> stopWatch.reset());
 
-        JButton romanButton = new JButton("Cadre romain");
-        JButton arabicButton = new JButton("Cadre arabe");
-        JButton digitalButton = new JButton("Numérique");
-
-        romanButton.addActionListener(e -> showDialog(DisplayMode.ROMAN));
-        arabicButton.addActionListener(e -> showDialog(DisplayMode.ARABIC));
-        digitalButton.addActionListener(e -> showDialog(DisplayMode.DIGITAL));
-
         add(idLabel);
         add(startButton);
         add(stopButton);
         add(resetButton);
-        add(romanButton);
-        add(arabicButton);
-        add(digitalButton);
+
+        for (DisplayMode displayMode : DisplayMode.values()) {
+            JButton button = new JButton(displayMode.getName());
+            button.addActionListener(e -> showDialog(displayMode));
+            add(button);
+        }
     }
     private void showDialog(DisplayMode displayMode) {
-        StopWatchVisualizerDialog dialog = new StopWatchVisualizerDialog(
+        StopWatchVisualizerFrame dialog = new StopWatchVisualizerFrame(
                 (JFrame) SwingUtilities.getWindowAncestor(this),
                 displayMode,
                 stopWatch
