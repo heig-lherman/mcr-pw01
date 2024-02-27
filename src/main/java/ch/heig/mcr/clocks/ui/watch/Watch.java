@@ -23,6 +23,7 @@ abstract public class Watch extends JPanel implements StopWatch.Observer {
     @Override
     public void update(long id, Duration value){
         this.value = value;
+        repaint();
     }
 
     protected int getHours() {

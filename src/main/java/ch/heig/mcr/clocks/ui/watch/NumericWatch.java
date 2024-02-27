@@ -11,6 +11,7 @@ public class NumericWatch extends Watch {
 
     @Override
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         String text = "Chrono #" + getStopWatch().getId() + ": "
                 + String.format("%02d", getHours()) + ":"
                 + String.format("%02d", getMinutes()) + ":"
