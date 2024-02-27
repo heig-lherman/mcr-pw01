@@ -5,10 +5,10 @@ import ch.heig.mcr.clocks.time.StopWatch;
 import javax.swing.*;
 import java.awt.*;
 
-public class Watch extends JPanel {
+abstract public class Watch extends JPanel {
     private final StopWatch stopWatch;
 
-    public Watch(StopWatch stopWatch) {
+    Watch(StopWatch stopWatch) {
         this.stopWatch = stopWatch;
         setLayout(new BorderLayout());
     }
