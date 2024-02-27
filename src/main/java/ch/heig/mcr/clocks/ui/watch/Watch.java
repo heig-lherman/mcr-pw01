@@ -8,9 +8,11 @@ import java.time.Duration;
 
 abstract public class Watch extends JPanel implements StopWatch.Observer {
     private final StopWatch stopWatch;
+    private Duration value;
 
     Watch(StopWatch stopWatch) {
         this.stopWatch = stopWatch;
+        this.value = Duration.ofSeconds(0);
         setLayout(new BorderLayout());
     }
 
@@ -19,6 +21,19 @@ abstract public class Watch extends JPanel implements StopWatch.Observer {
     }
 
     @Override
-    public void update(long id, Duration value) {
+    public void update(long id, Duration value){
+        this.value = value;
+    }
+
+    protected int getHours() {
+        return (int) value.toHours();
+    }
+
+    protected int getMinutes() {
+        return (int) (value.toMinutes() % 60);
+    }
+
+    protected int getSeconds() {
+        return (int) (value.getSeconds() % 60);
     }
 }
