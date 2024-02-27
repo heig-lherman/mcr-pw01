@@ -27,7 +27,7 @@ abstract public class Watch extends JPanel implements StopWatch.Observer {
     }
 
     protected int getHours() {
-        return (int) value.toHours() % 24;
+        return (int) value.toHours();
     }
 
     protected int getMinutes() {

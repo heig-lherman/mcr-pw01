@@ -43,7 +43,7 @@ abstract public class GraphicWatch extends Watch {
         float hourHandLen = radius / 2f;
         Shape hourHand = new Line2D.Float(0f, 0f, 0f, -hourHandLen);
         double minuteRot = getMinutes() * Math.PI / 30d;
-        double hourRot = getHours() * Math.PI / 6d + minuteRot / 12d;
+        double hourRot = getHours() % 24 * Math.PI / 6d + minuteRot / 12d;
         g2.setStroke(new BasicStroke(8f));
         g2.setPaint(hourColor);
         g2.draw(AffineTransform.getRotateInstance(hourRot).createTransformedShape(hourHand));
