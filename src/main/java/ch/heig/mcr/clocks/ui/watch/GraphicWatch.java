@@ -6,10 +6,6 @@ import ch.heig.mcr.clocks.time.StopWatch;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.Objects;
 
