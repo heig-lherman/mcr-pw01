@@ -14,7 +14,7 @@ public class NumericWatch extends Watch {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         String text = StopWatchString.stopWatchWithId(getStopWatch().getId()) + ": "
-                + String.format("%02d", getHours()) + ":"
+                + String.format("%02d", getHours() % 24) + ":"
                 + String.format("%02d", getMinutes()) + ":"
                 + String.format("%02d", getSeconds());
         FontMetrics fm = g.getFontMetrics();

@@ -6,6 +6,8 @@ import ch.heig.mcr.clocks.time.StopWatch;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
@@ -33,38 +35,19 @@ abstract public class GraphicWatch extends Watch {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 10, 10, this.getWidth() - 20, this.getHeight() - 20, this);
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Rectangle rect = SwingUtilities.calculateInnerArea(this, null);
-        float radius = Math.min(rect.width, rect.height) / 2f - 10f;
-        g2.translate(rect.getCenterX(), rect.getCenterY());
+        drawNeedle(g, secondColor, Math.PI * getSeconds() / 30, 0.75);
+        drawNeedle(g, minuteColor, Math.PI * getMinutes() / 30, 0.5);
+        drawNeedle(g, hourColor, Math.PI * (getHours() + getMinutes() / 360.0), 0.4);
+    }
 
-        // Drawing the hour hand
-        float hourHandLen = radius / 2f;
-        Shape hourHand = new Line2D.Float(0f, 0f, 0f, -hourHandLen);
-        double minuteRot = getMinutes() * Math.PI / 30d;
-        double hourRot = getHours() % 24 * Math.PI / 6d + minuteRot / 12d;
-        g2.setStroke(new BasicStroke(8f));
-        g2.setPaint(hourColor);
-        g2.draw(AffineTransform.getRotateInstance(hourRot).createTransformedShape(hourHand));
-
-        // Drawing the minute hand
-        float minuteHandLen = 5f * radius / 6f;
-        Shape minuteHand = new Line2D.Float(0f, 0f, 0f, -minuteHandLen);
-        g2.setStroke(new BasicStroke(4f));
-        g2.setPaint(minuteColor);
-        g2.draw(AffineTransform.getRotateInstance(minuteRot).createTransformedShape(minuteHand));
-
-        // Drawing the second hand
-        float r = radius / 6f;
-        float secondHandLen = radius - r;
-        Shape secondHand = new Line2D.Float(0f, r, 0f, -secondHandLen);
-        double secondRot = getSeconds() * Math.PI / 30d;
-        g2.setPaint(secondColor);
-        g2.setStroke(new BasicStroke(1f));
-        g2.draw(AffineTransform.getRotateInstance(secondRot).createTransformedShape(secondHand));
-        g2.fill(new Ellipse2D.Float(-r / 4f, -r / 4f, r / 2f, r / 2f));
-
-        g2.dispose();
+    private void drawNeedle(Graphics g, Color color, double angle, double length){
+        int x = getWidth() / 2;
+        int y = getHeight() / 2;
+        int x2 = (int) (x + Math.sin(angle) * (getWidth() / 2 * length));
+        int y2 = (int) (y - Math.cos(angle) * (getHeight() / 2 * length));
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(2));
+        g.setColor(color);
+        g2.draw(new Line2D.Double(x, y, x2, y2));
     }
 }
