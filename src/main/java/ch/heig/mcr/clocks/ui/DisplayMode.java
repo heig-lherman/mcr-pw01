@@ -7,23 +7,25 @@ import ch.heig.mcr.clocks.ui.watch.NumericWatch;
 import ch.heig.mcr.clocks.ui.watch.RomanWatch;
 import ch.heig.mcr.clocks.ui.watch.Watch;
 
+import java.time.Duration;
+
 public enum DisplayMode {
     ROMAN(StopWatchString.ROMAN) {
         @Override
-        Watch createWatch(StopWatch stopWatch) {
-            return new RomanWatch(stopWatch);
+        Watch createWatch(long id, Duration value) {
+            return new RomanWatch(id, value);
         }
     },
     ARABIC(StopWatchString.ARABIC) {
         @Override
-        Watch createWatch(StopWatch stopWatch) {
-            return new ArabicWatch(stopWatch);
+        Watch createWatch(long id, Duration value) {
+            return new ArabicWatch(id, value);
         }
     },
     DIGITAL(StopWatchString.DIGITAL) {
         @Override
-        Watch createWatch(StopWatch stopWatch) {
-            return new NumericWatch(stopWatch);
+        Watch createWatch(long id, Duration value) {
+            return new NumericWatch(id, value);
         }
     };
     private final String name;
@@ -33,5 +35,5 @@ public enum DisplayMode {
     String getName() {
         return name;
     }
-    abstract Watch createWatch(StopWatch stopWatch);
+    abstract Watch createWatch(long id, Duration value);
 }

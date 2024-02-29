@@ -7,17 +7,17 @@ import java.awt.*;
 import java.time.Duration;
 
 abstract public class Watch extends JPanel implements StopWatch.Observer {
-    private final StopWatch stopWatch;
+    private final long id;
     private Duration value;
 
-    Watch(StopWatch stopWatch) {
-        this.stopWatch = stopWatch;
-        this.value = stopWatch.getDuration();
+    Watch(long id, Duration value) {
+        this.id = id;
+        this.value = value;
         setLayout(new BorderLayout());
     }
 
-    protected StopWatch getStopWatch() {
-        return stopWatch;
+    protected long getId() {
+        return id;
     }
 
     @Override
