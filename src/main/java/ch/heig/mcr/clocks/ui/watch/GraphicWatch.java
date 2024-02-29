@@ -7,6 +7,7 @@ import ch.heig.mcr.clocks.time.StopWatch;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
+import java.time.Duration;
 import java.util.Objects;
 
 abstract public class GraphicWatch extends Watch {
@@ -14,8 +15,8 @@ abstract public class GraphicWatch extends Watch {
     private final Color minuteColor;
     private final Color secondColor;
     private final Image image;
-    GraphicWatch(StopWatch stopWatch, String imagePath, Color hourColor, Color minuteColor, Color secondColor) {
-        super(stopWatch);
+    GraphicWatch(long id, Duration value, String imagePath, Color hourColor, Color minuteColor, Color secondColor) {
+        super(id, value);
         this.image = new ImageIcon(
                 (Objects.requireNonNull(getClass().getResource(imagePath))))
                 .getImage()
@@ -23,7 +24,7 @@ abstract public class GraphicWatch extends Watch {
         this.hourColor = hourColor;
         this.minuteColor = minuteColor;
         this.secondColor = secondColor;
-        JLabel label = new JLabel(StopWatchString.stopWatchWithId(stopWatch.getId()), SwingConstants.CENTER);
+        JLabel label = new JLabel(StopWatchString.stopWatchWithId(getId()), SwingConstants.CENTER);
         add(label, BorderLayout.CENTER);
     }
 

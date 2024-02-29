@@ -4,16 +4,17 @@ import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
 
 import java.awt.*;
+import java.time.Duration;
 
 public class NumericWatch extends Watch {
-    public NumericWatch(StopWatch stopWatch) {
-        super(stopWatch);
+    public NumericWatch(long id, Duration value) {
+        super(id, value);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        String text = StopWatchString.stopWatchWithId(getStopWatch().getId()) + ": "
+        String text = StopWatchString.stopWatchWithId(getId()) + ": "
                 + String.format("%02d", getHours() % 24) + ":"
                 + String.format("%02d", getMinutes()) + ":"
                 + String.format("%02d", getSeconds());
