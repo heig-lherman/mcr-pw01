@@ -1,28 +1,37 @@
 package ch.heig.mcr.clocks.ui.watch;
 
-import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
-
+import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import java.awt.*;
-import java.time.Duration;
+import javax.swing.*;
 
-public class NumericWatch extends Watch {
-    public NumericWatch(long id, Duration value) {
-        super(id, value);
+public final class NumericWatch extends Watch {
+
+    private final JLabel label;
+
+    public NumericWatch(StopWatch stopWatch) {
+        super(stopWatch);
+        setLayout(new BorderLayout());
+
+        label = new JLabel(
+                getFormattedText(),
+                SwingConstants.CENTER
+        );
+
+        add(label, BorderLayout.CENTER);
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        String text = StopWatchString.stopWatchWithId(getId()) + ": "
-                + String.format("%02d", getHours() % 24) + ":"
-                + String.format("%02d", getMinutes()) + ":"
-                + String.format("%02d", getSeconds());
-        FontMetrics fm = g.getFontMetrics();
-        int textWidth = fm.stringWidth(text);
-        int textHeight = fm.getAscent();
-        int x = (getWidth() - textWidth) / 2;
-        int y = (getHeight() + textHeight) / 2;
-        g.drawString(text, x, y);
+    public void update() {
+        label.setText(getFormattedText());
+    }
+
+    private String getFormattedText() {
+        return "%s: %02dh %02dm %02ds".formatted(
+                StopWatchString.stopWatchWithId(getStopWatchId()),
+                getHours(),
+                getMinutes(),
+                getSeconds()
+        );
     }
 }

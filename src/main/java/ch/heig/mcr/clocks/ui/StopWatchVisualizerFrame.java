@@ -2,44 +2,45 @@ package ch.heig.mcr.clocks.ui;
 
 import ch.heig.mcr.clocks.time.StopWatch;
 import ch.heig.mcr.clocks.ui.watch.Watch;
-
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class StopWatchVisualizerFrame extends JFrame {
 
-    private final DisplayMode displayMode;
-    private final StopWatch[] stopWatches;
-
     public StopWatchVisualizerFrame(
-            JFrame parentFrame,
             DisplayMode displayMode,
             StopWatch stopWatch
     ) {
-        this(parentFrame, displayMode, new StopWatch[]{stopWatch});
+        this(displayMode, new StopWatch[]{stopWatch});
     }
 
     public StopWatchVisualizerFrame(
-            JFrame parentFrame,
             DisplayMode displayMode,
             StopWatch[] stopWatches
     ) {
-        super(parentFrame.getGraphicsConfiguration());
-        this.displayMode = displayMode;
-        this.stopWatches = stopWatches;
-        addWatchPanel();
-        setSize(235 * stopWatches.length, 260);
-        setLocationRelativeTo(parentFrame);
-        setResizable(stopWatches.length > 1);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-    }
+        setResizable(stopWatches.length > 1);
+        setBackground(Color.LIGHT_GRAY);
 
-    private void addWatchPanel() {
-        setLayout(new GridLayout(1, stopWatches.length));
+        JPanel contentPane = new JPanel();
+        setContentPane(contentPane);
+
         for (StopWatch stopWatch : stopWatches) {
-            Watch watch = displayMode.createWatch(stopWatch.getId(), stopWatch.getDuration());
-            stopWatch.addObserver(watch);
+            Watch watch = displayMode.createWatch(stopWatch);
             add(watch);
         }
+    }
+
+    @Override
+    public void dispose() {
+        synchronized (getTreeLock()) {
+            for (Component component : getComponents()) {
+                if (component instanceof Disposable disposable) {
+                    disposable.dispose();
+                }
+            }
+        }
+
+        super.dispose();
     }
 }

@@ -1,40 +1,64 @@
 package ch.heig.mcr.clocks.ui.watch;
 
 import ch.heig.mcr.clocks.time.StopWatch;
-
+import ch.heig.mcr.clocks.ui.Disposable;
+import ch.heig.mcr.clocks.util.Observable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
-import java.awt.*;
-import java.time.Duration;
 
-abstract public class Watch extends JPanel implements StopWatch.Observer {
-    private final long id;
-    private Duration value;
+abstract public class Watch extends JPanel implements Observable.Observer, Disposable {
 
-    Watch(long id, Duration value) {
-        this.id = id;
-        this.value = value;
-        setLayout(new BorderLayout());
+    protected static final int WIDTH = 200;
+    protected static final int HEIGHT = 200;
+
+    private final StopWatch stopWatch;
+
+    Watch(StopWatch stopWatch) {
+        this.stopWatch = stopWatch;
+        stopWatch.addObserver(this);
+
+        setSize(WIDTH, HEIGHT);
+        setPreferredSize(getSize());
+
+        super.addMouseListener(new MouseActionListener());
     }
 
-    protected long getId() {
-        return id;
+    protected final long getStopWatchId() {
+        return stopWatch.getId();
     }
 
     @Override
-    public void update(long id, Duration value){
-        this.value = value;
+    public void update() {
         repaint();
     }
 
+    @Override
+    public final void dispose() {
+        stopWatch.removeObserver(this);
+    }
+
     protected int getHours() {
-        return (int) value.toHours();
+        return (int) stopWatch.getDuration().toHours();
     }
 
     protected int getMinutes() {
-        return (int) (value.toMinutes() % 60);
+        return stopWatch.getDuration().toMinutesPart();
     }
 
     protected int getSeconds() {
-        return (int) (value.getSeconds() % 60);
+        return stopWatch.getDuration().toSecondsPart();
+    }
+
+    private final class MouseActionListener extends MouseAdapter {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (stopWatch.isRunning()) {
+                stopWatch.stop();
+            } else {
+                stopWatch.start();
+            }
+        }
     }
 }

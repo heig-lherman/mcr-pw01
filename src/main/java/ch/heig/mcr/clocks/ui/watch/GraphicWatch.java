@@ -1,50 +1,63 @@
 package ch.heig.mcr.clocks.ui.watch;
 
-import ch.heig.mcr.clocks.constants.StopWatchConstants;
-import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
-
-import javax.swing.*;
+import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import java.awt.*;
 import java.awt.geom.Line2D;
-import java.time.Duration;
-import java.util.Objects;
 
 abstract public class GraphicWatch extends Watch {
+
+    private final Image image;
     private final Color hourColor;
     private final Color minuteColor;
     private final Color secondColor;
-    private final Image image;
-    GraphicWatch(long id, Duration value, String imagePath, Color hourColor, Color minuteColor, Color secondColor) {
-        super(id, value);
-        this.image = new ImageIcon(
-                (Objects.requireNonNull(getClass().getResource(imagePath))))
-                .getImage()
-                .getScaledInstance(StopWatchConstants.WIDTH, StopWatchConstants.HEIGHT, Image.SCALE_DEFAULT);
+
+    GraphicWatch(
+            StopWatch stopWatch,
+            String imagePath,
+            Color hourColor,
+            Color minuteColor,
+            Color secondColor
+    ) {
+        super(stopWatch);
+        this.image = Toolkit.getDefaultToolkit()
+                .getImage(getClass().getResource(imagePath))
+                .getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
+
         this.hourColor = hourColor;
         this.minuteColor = minuteColor;
         this.secondColor = secondColor;
-        JLabel label = new JLabel(StopWatchString.stopWatchWithId(getId()), SwingConstants.CENTER);
-        add(label, BorderLayout.CENTER);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 10, 10, this.getWidth() - 20, this.getHeight() - 20, this);
-        drawNeedle(g, secondColor, Math.PI * getSeconds() / 30, 0.75);
-        drawNeedle(g, minuteColor, Math.PI * getMinutes() / 30, 0.5);
-        drawNeedle(g, hourColor, Math.PI * (getHours() + getMinutes() / 360.0), 0.4);
+
+        Graphics2D graph = (Graphics2D) g;
+        graph.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
+
+        graph.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        drawNeedle(graph, secondColor, Math.PI * getSeconds() / 30, 0.75);
+        drawNeedle(graph, minuteColor, Math.PI * getMinutes() / 30, 0.5);
+        drawNeedle(graph, hourColor, Math.PI * (getHours() + getMinutes() / 360.0), 0.4);
+
+        var text = StopWatchString.stopWatchWithId(getStopWatchId());
+        FontMetrics metrics = graph.getFontMetrics();
+        int x = (getWidth() - metrics.stringWidth(text)) / 2;
+        int y = (getHeight() - metrics.getHeight()) / 2 + 25;
+        graph.drawString(text, x, y);
     }
 
-    private void drawNeedle(Graphics g, Color color, double angle, double length){
+    private void drawNeedle(Graphics2D graph, Color color, double angle, double length) {
         int x = getWidth() / 2;
         int y = getHeight() / 2;
         int x2 = (int) (x + Math.sin(angle) * (getWidth() / 2 * length));
         int y2 = (int) (y - Math.cos(angle) * (getHeight() / 2 * length));
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(2));
-        g.setColor(color);
-        g2.draw(new Line2D.Double(x, y, x2, y2));
+        graph.setStroke(new BasicStroke(2));
+        graph.setColor(color);
+        graph.draw(new Line2D.Double(x, y, x2, y2));
     }
 }

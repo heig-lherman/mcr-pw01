@@ -1,26 +1,23 @@
 package ch.heig.mcr.clocks.time;
 
+import ch.heig.mcr.clocks.util.Observable;
 import java.time.Duration;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
  * A simple stopwatch that includes an API for observing the elapsed time.
  */
-public class StopWatch {
+public class StopWatch extends Observable {
 
     private static final long TIMER_INTERVAL = 1000;
     private static int nextId = 0;
-    private boolean running = false;
+
     private final int id;
     private final Timer eventTimer;
 
     private long count = 0;
     private CountIncreaseTask currentTask;
-
-    private final List<Observer> observers = new LinkedList<>();
 
     public StopWatch() {
         this.id = ++nextId;
@@ -29,9 +26,9 @@ public class StopWatch {
 
     public void start() {
         if (isRunning()) {
-            throw new IllegalStateException("Stopwatch is already running");
+            return;
         }
-        running = true;
+
         currentTask = new CountIncreaseTask();
         eventTimer.scheduleAtFixedRate(
                 currentTask,
@@ -42,49 +39,28 @@ public class StopWatch {
 
     public void stop() {
         if (!isRunning()) {
-            throw new IllegalStateException("Stopwatch is not running");
+            return;
         }
-        running = false;
+
         currentTask.cancel();
+        currentTask = null;
     }
 
     public void reset() {
         count = 0;
-        if (!isRunning()) {
-            notifyObservers();
-        }
+        notifyObservers();
     }
 
     public boolean isRunning() {
-        return running;
-    }
-
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
+        return currentTask != null;
     }
 
     public long getId() {
         return id;
     }
 
-    private void notifyObservers() {
-        observers.forEach(observer -> observer.update(
-                id, getDuration()
-        ));
-    }
-
     public Duration getDuration(){
         return Duration.ofSeconds(count);
-    }
-
-    @FunctionalInterface
-    public interface Observer {
-
-        void update(long id, Duration value);
     }
 
     private class CountIncreaseTask extends TimerTask {

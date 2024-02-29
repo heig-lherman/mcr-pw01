@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="5 stopwatches [start]" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="ch.heig.mcr.clocks.Main" />
+    <module name="clocks" />
+    <option name="PROGRAM_PARAMETERS" value="5" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="ch.heig.mcr.clocks.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

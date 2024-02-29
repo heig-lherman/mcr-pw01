@@ -1,7 +1,7 @@
 package ch.heig.mcr.clocks.ui;
 
-import ch.heig.mcr.clocks.constants.StopWatchString;
 import ch.heig.mcr.clocks.time.StopWatch;
+import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import java.awt.*;
 import javax.swing.*;
 
@@ -34,12 +34,14 @@ public class StopWatchControlRow extends JPanel {
             add(button);
         }
     }
+
     private void showDialog(DisplayMode displayMode) {
         StopWatchVisualizerFrame dialog = new StopWatchVisualizerFrame(
-                (JFrame) SwingUtilities.getWindowAncestor(this),
                 displayMode,
                 stopWatch
         );
+
+        dialog.pack();
         dialog.setVisible(true);
     }
 }
