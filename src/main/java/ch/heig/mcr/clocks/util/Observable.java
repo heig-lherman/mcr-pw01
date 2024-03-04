@@ -3,7 +3,7 @@ package ch.heig.mcr.clocks.util;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Observable {
+public abstract class Observable {
 
     private final List<Observer> observers = new LinkedList<>();
 
@@ -15,7 +15,7 @@ public class Observable {
         observers.remove(observer);
     }
 
-    public void notifyObservers() {
+    protected void notifyObservers() {
         for (Observer observer : observers) {
             observer.update();
         }
