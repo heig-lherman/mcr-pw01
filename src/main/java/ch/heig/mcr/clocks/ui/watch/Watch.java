@@ -7,14 +7,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 
-abstract public class Watch extends JPanel implements Observable.Observer, Disposable {
+public abstract class Watch extends JPanel implements Observable.Observer, Disposable {
 
     protected static final int WIDTH = 200;
     protected static final int HEIGHT = 200;
 
     private final StopWatch stopWatch;
 
-    Watch(StopWatch stopWatch) {
+    protected Watch(StopWatch stopWatch) {
         this.stopWatch = stopWatch;
         stopWatch.addObserver(this);
 

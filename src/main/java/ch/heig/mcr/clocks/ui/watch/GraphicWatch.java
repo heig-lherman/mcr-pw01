@@ -5,14 +5,14 @@ import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import java.awt.*;
 import java.awt.geom.Line2D;
 
-abstract public class GraphicWatch extends Watch {
+public abstract class GraphicWatch extends Watch {
 
     private final Image image;
     private final Color hourColor;
     private final Color minuteColor;
     private final Color secondColor;
 
-    GraphicWatch(
+    protected  GraphicWatch(
             StopWatch stopWatch,
             String imagePath,
             Color hourColor,

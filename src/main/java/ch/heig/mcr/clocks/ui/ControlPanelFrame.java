@@ -2,7 +2,6 @@ package ch.heig.mcr.clocks.ui;
 
 import ch.heig.mcr.clocks.time.StopWatch;
 import ch.heig.mcr.clocks.ui.constant.StopWatchString;
-import java.awt.*;
 import javax.swing.*;
 
 public class ControlPanelFrame extends JFrame {
@@ -22,6 +21,6 @@ public class ControlPanelFrame extends JFrame {
             add(new StopWatchControlRow(stopWatches[i]));
         }
 
-        add(new StopWatchControlAll(new FlowLayout(FlowLayout.RIGHT), stopWatches));
+        add(new StopWatchControlAll(stopWatches));
     }
 }

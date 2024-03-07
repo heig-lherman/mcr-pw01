@@ -7,8 +7,8 @@ import javax.swing.*;
 public class StopWatchControlAll extends JPanel {
     private final StopWatch[] stopWatches;
 
-    public StopWatchControlAll(LayoutManager layout, StopWatch[] stopWatches) {
-        super(layout);
+    public StopWatchControlAll(StopWatch[] stopWatches) {
+        super(new FlowLayout(FlowLayout.RIGHT));
         this.stopWatches = stopWatches;
 
         add(new JLabel(StopWatchString.ALL_STOPWATCHES));
