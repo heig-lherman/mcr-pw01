@@ -5,10 +5,20 @@ import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * A control row for a given stopwatch.
+ *
+ * @author Loïc Herman
+ * @author Massimo Stefani
+ */
 public class StopWatchControlRow extends JPanel {
 
     private final StopWatch stopWatch;
 
+    /**
+     * Creates a new control row for the given stopwatch.
+     * @param stopWatch the stopwatch to control
+     */
     public StopWatchControlRow(StopWatch stopWatch) {
         super(new FlowLayout(FlowLayout.LEFT));
         this.stopWatch = stopWatch;
@@ -29,7 +39,7 @@ public class StopWatchControlRow extends JPanel {
         add(resetButton);
 
         for (DisplayMode displayMode : DisplayMode.values()) {
-            JButton button = new JButton(displayMode.getName());
+            JButton button = new JButton(displayMode.getDescription());
             button.addActionListener(e -> showDialog(displayMode));
             add(button);
         }

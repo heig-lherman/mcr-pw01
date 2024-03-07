@@ -7,6 +7,9 @@ import java.util.TimerTask;
 
 /**
  * A simple stopwatch that includes an API for observing the elapsed time.
+ *
+ * @author Loïc Herman
+ * @author Massimo Stefani
  */
 public class StopWatch extends Observable {
 

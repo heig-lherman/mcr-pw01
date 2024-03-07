@@ -5,6 +5,12 @@ import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * A dial that displays the time in a numeric format.
+ *
+ * @author Loïc Herman
+ * @author Massimo Stefani
+ */
 public final class NumericWatch extends Watch {
 
     private final JLabel label;

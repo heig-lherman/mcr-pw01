@@ -5,6 +5,13 @@ import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import java.awt.*;
 import java.awt.geom.Line2D;
 
+/**
+ * Base class for dials that implement a graphic representation of the time
+ * using a background image.
+ *
+ * @author Loïc Herman
+ * @author Massimo Stefani
+ */
 public abstract class GraphicWatch extends Watch {
 
     private final Image image;
@@ -12,7 +19,7 @@ public abstract class GraphicWatch extends Watch {
     private final Color minuteColor;
     private final Color secondColor;
 
-    protected  GraphicWatch(
+    protected GraphicWatch(
             StopWatch stopWatch,
             String imagePath,
             Color hourColor,

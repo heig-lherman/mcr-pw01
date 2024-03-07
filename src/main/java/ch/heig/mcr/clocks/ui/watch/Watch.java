@@ -1,13 +1,19 @@
 package ch.heig.mcr.clocks.ui.watch;
 
 import ch.heig.mcr.clocks.time.StopWatch;
-import ch.heig.mcr.clocks.ui.Disposable;
 import ch.heig.mcr.clocks.util.Observable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 
-public abstract class Watch extends JPanel implements Observable.Observer, Disposable {
+/**
+ * A base dial class for observing events
+ * on a stopwatch and displaying them.
+ *
+ * @author Loïc Herman
+ * @author Massimo Stefani
+ */
+public abstract class Watch extends JPanel implements Observable.Observer {
 
     protected static final int WIDTH = 200;
     protected static final int HEIGHT = 200;
@@ -28,13 +34,22 @@ public abstract class Watch extends JPanel implements Observable.Observer, Dispo
         return stopWatch.getId();
     }
 
+    /**
+     * Calls for a repaint of the watch, which should in most cases
+     * update the display of the time.
+     *
+     * Cases when this behavior is not desired can override the
+     * default behavior with a custom implementation.
+     */
     @Override
     public void update() {
         repaint();
     }
 
-    @Override
-    public final void dispose() {
+    /**
+     * Disposes of the watch and unsubscribes itself from the stopwatch.
+     */
+    public void dispose() {
         stopWatch.removeObserver(this);
     }
 
@@ -50,6 +65,10 @@ public abstract class Watch extends JPanel implements Observable.Observer, Dispo
         return stopWatch.getDuration().toSecondsPart();
     }
 
+    /**
+     * A listener for mouse events on the dial so that the stopwatch
+     * can be stopped or restarted on demand.
+     */
     private final class MouseActionListener extends MouseAdapter {
 
         @Override

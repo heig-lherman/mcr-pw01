@@ -1,5 +1,11 @@
 package ch.heig.mcr.clocks.ui.constant;
 
+/**
+ * String constants reused across the application.
+ *
+ * @author Loïc Herman
+ * @author Massimo Stefani
+ */
 public final class StopWatchString {
     public static final String CONTROL_PANEL_TITLE = "Panneau de contrôle";
     public static final String ALL_STOPWATCHES = "Tous les chronos";

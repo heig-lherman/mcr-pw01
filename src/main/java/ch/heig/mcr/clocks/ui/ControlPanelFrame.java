@@ -4,6 +4,13 @@ import ch.heig.mcr.clocks.time.StopWatch;
 import ch.heig.mcr.clocks.ui.constant.StopWatchString;
 import javax.swing.*;
 
+/**
+ * A control panel frame that initializes and controls all
+ * the stopwatches required.
+ *
+ * @author Loïc Herman
+ * @author Massimo Stefani
+ */
 public class ControlPanelFrame extends JFrame {
 
     public ControlPanelFrame(int amountStopwatches) {
