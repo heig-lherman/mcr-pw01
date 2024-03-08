@@ -58,7 +58,9 @@ public class StopWatchVisualizerFrame extends JFrame {
     public void dispose() {
         synchronized (getTreeLock()) {
             for (Component component : getComponents()) {
-                ((Watch) component).dispose();
+                if (component instanceof Watch dial) {
+                    dial.dispose();
+                }
             }
         }
 
