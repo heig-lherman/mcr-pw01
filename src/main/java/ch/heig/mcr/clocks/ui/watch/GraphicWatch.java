@@ -59,12 +59,12 @@ public abstract class GraphicWatch extends Watch {
     }
 
     private void drawNeedle(Graphics2D graph, Color color, double angle, double length) {
-        int x = getWidth() / 2;
-        int y = getHeight() / 2;
-        int x2 = (int) (x + Math.sin(angle) * (getWidth() / 2 * length));
-        int y2 = (int) (y - Math.cos(angle) * (getHeight() / 2 * length));
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
+        int endX = (int) (centerX * (1 + Math.sin(angle) * length));
+        int endY = (int) (centerY * (1 - Math.cos(angle) * length));
         graph.setStroke(new BasicStroke(2));
         graph.setColor(color);
-        graph.draw(new Line2D.Double(x, y, x2, y2));
+        graph.draw(new Line2D.Double(centerX, centerY, endX, endY));
     }
 }
