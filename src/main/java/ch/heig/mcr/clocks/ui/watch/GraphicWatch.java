@@ -49,7 +49,7 @@ public abstract class GraphicWatch extends Watch {
         graph.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         drawNeedle(graph, secondColor, Math.PI * getSeconds() / 30, 0.75);
         drawNeedle(graph, minuteColor, Math.PI * (getMinutes() + (getSeconds() / 60.0)) / 30.0, 0.5);
-        drawNeedle(graph, hourColor, Math.PI * (getHours() + getMinutes() / 360.0), 0.4);
+        drawNeedle(graph, hourColor, Math.PI * (getHours() + (getMinutes() / 60.0)) / 6.0, 0.4);
 
         var text = StopWatchString.stopWatchWithId(getStopWatchId());
         FontMetrics metrics = graph.getFontMetrics();

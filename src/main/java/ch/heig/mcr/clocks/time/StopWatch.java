@@ -19,7 +19,7 @@ public class StopWatch extends Observable {
     private final int id;
     private final Timer eventTimer;
 
-    private long count = 0;
+    private long count = 10800;
     private CountIncreaseTask currentTask;
 
     public StopWatch() {
