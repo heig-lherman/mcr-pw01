@@ -20,6 +20,10 @@ public abstract class Watch extends JPanel implements Observable.Observer {
 
     private final StopWatch stopWatch;
 
+    /**
+     * Creates a new watch for the given stopwatch.
+     * @param stopWatch the stopwatch to observe
+     */
     protected Watch(StopWatch stopWatch) {
         this.stopWatch = stopWatch;
         stopWatch.addObserver(this);

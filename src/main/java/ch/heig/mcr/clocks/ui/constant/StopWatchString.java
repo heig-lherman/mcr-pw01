@@ -15,6 +15,12 @@ public final class StopWatchString {
     public static final String START = "Démarrer";
     public static final String STOP = "Arrêter";
     public static final String RESET = "Réinitialiser";
+
+    /**
+     * Returns the string representation of a stopwatch with the given id.
+     * @param id the id of the stopwatch
+     * @return the string representation of a stopwatch with the given id
+     */
     public static String stopWatchWithId(long id) {
         return "Chrono #" + id;
     }

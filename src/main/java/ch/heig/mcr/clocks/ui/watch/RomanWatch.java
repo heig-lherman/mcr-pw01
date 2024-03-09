@@ -11,6 +11,10 @@ import java.awt.*;
  */
 public final class RomanWatch extends GraphicWatch {
 
+    /**
+     * Creates a new watch with Roman numerals.
+     * @param stopWatch the stopwatch to observe
+     */
     public RomanWatch(StopWatch stopWatch) {
         super(
                 stopWatch,

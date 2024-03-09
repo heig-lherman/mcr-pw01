@@ -11,6 +11,10 @@ import java.awt.*;
  */
 public final class ArabicWatch extends GraphicWatch {
 
+    /**
+     * Creates a new watch with Arabic numerals.
+     * @param stopWatch the stopwatch to observe
+     */
     public ArabicWatch(StopWatch stopWatch) {
         super(
                 stopWatch,

@@ -13,6 +13,10 @@ import javax.swing.*;
  */
 public class ControlPanelFrame extends JFrame {
 
+    /**
+     * Creates a new control panel frame with the given amount of stopwatches.
+     * @param amountStopwatches the amount of stopwatches to control
+     */
     public ControlPanelFrame(int amountStopwatches) {
         super(StopWatchString.CONTROL_PANEL_TITLE);
         StopWatch[] stopWatches = new StopWatch[amountStopwatches];
